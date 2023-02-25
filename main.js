@@ -7,21 +7,24 @@ toggle.addEventListener('click',function(){
 
 var icon = document.getElementById("moon-icon");
 icon.onclick = function(){
-     document.body.classList.toggle("dark-theme");
+     
 
      if(icon.classList.contains("fa-moon")){
+      document.body.classList.toggle("dark-theme");
       icon.classList.remove("fa-moon");
+      icon.classList.add("fa-cloud");
+    } else if (icon.classList.contains("fa-cloud")){
+      document.body.classList.toggle("dark-theme");
+      document.body.classList.toggle("cloud-theme");
+      icon.classList.remove("fa-cloud");
       icon.classList.add("fa-sun");
     } else{
+      document.body.classList.toggle("cloud-theme");
       icon.classList.remove("fa-sun");
       icon.classList.add("fa-moon");
     }
   }
 
-var icon2 = document.getElementById("cloud-icon");
-icon2.onclick = function(){
-  document.body.classList.toggle("cloud-theme");
-}
 
 //     // document.body.classList.toggle("dark-theme hr-line");
 //     // document.body.classList.toggle("dark-theme home-content");
