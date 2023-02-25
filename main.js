@@ -18,6 +18,11 @@ icon.onclick = function(){
     }
   }
 
+var icon2 = document.getElementById("cloud-icon");
+icon2.onclick = function(){
+  document.body.classList.toggle("cloud-theme");
+}
+
 //     // document.body.classList.toggle("dark-theme hr-line");
 //     // document.body.classList.toggle("dark-theme home-content");
 //     // document.body.classList.toggle("dark-theme h1");

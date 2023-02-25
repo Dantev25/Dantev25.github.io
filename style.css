@@ -32,6 +32,10 @@ body{
     --dark: #DCDCDC
 }
 
+.cloud-theme{
+    background-image: url("Images/cloud-background.png");
+}
+
 .dark-theme .hr-line{
     color: #DCDCDC;
 }
