@@ -303,7 +303,7 @@ a{
 }
 
 .dark-theme h1{
-    color: #C0C0C0;
+    color: #F0FFF0;
 }
 
 .cloud-theme h1{
@@ -319,7 +319,7 @@ a{
 }
 
 .dark-theme h4{
-    color: #FFFAFA;
+    color: rgb(0, 71, 0);
 }
 
 .cloud-theme h4{
@@ -337,7 +337,7 @@ a{
 }
 
 .dark-theme .home-content p{
-    color: #FFFAFA;
+    color: rgb(0, 71, 0);;
 }
 
 .cloud-theme .home-content p{
@@ -486,7 +486,11 @@ hr{
 }
 
 .dark-theme .article-title{
-    color: black
+    color: midnightblue;
+}
+
+.dark-theme .article-clock{
+    color: #FFFFFF;
 }
 
 .cloud-theme .article-title{
@@ -809,6 +813,10 @@ ul.breadcrumb {
     color:#ffffff;
 }
 
+.dark-theme .footer-links a:hover{
+    color: midnightblue;
+}
+
 .footer-links a:active{
     color: #76a587;
 }
@@ -841,6 +849,10 @@ ul.breadcrumb {
 
 .footer-copyright a:hover{
     color:#ffffff;
+}
+
+.dark-theme .footer-copyright a:hover{
+    color: midnightblue;
 }
 
 .footer-copyright a:active{
