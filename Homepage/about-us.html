@@ -134,7 +134,9 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+            <h1>List of Full Names</h1>
+            <ul id="fullNamesList"></ul>
         </main>
 
         <!-- Custom javascript main.js file-->
@@ -210,5 +212,17 @@
             
     
           </footer>
+          <script>
+            // retrieve full names array from local storage
+            const fullNames = JSON.parse(localStorage.getItem("fullNames")) || [];
+
+            // display full names in a list
+            const fullNamesList = document.getElementById("fullNamesList");
+            fullNames.forEach((fullName) => {
+              const li = document.createElement("li");
+              li.textContent = fullName;
+              fullNamesList.appendChild(li);
+            });
+          </script>
     </body>
 </html>
