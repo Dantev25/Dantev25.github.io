@@ -26,23 +26,6 @@ icon.onclick = function(){
   }
 
 
-//     // document.body.classList.toggle("dark-theme hr-line");
-//     // document.body.classList.toggle("dark-theme home-content");
-//     // document.body.classList.toggle("dark-theme h1");
-//     // document.body.classList.toggle("dark-theme article-bg");
-//     document.body.classList.toggle("dark-theme dark-logo");
-//     document.body.classList.toggle("dark-theme homepage-h2");
-//     // document.body.classList.toggle("dark-theme recent-articles p");
-
-//     // if(document.body.classList.toggle("dark-theme")){
-//     //   icon.innerHTML = "&#xf185";
-//     // } else {
-//     //   icon.innerHTML = "&#xf186";
-//     // }
-
-
-
-
 
 //drag and drop
 var diffX, diffY, theElement;
@@ -192,3 +175,112 @@ function initComparisons() {
   }
 
 
+// form validation and session storage
+
+// When the page is loaded
+window.onload = function() {
+  // Check if session storage exists for the form data
+  if (sessionStorage.getItem('regform')) {
+    // If it exists, set the form fields to the saved data
+    var form = document.forms.regform;
+    var savedData = JSON.parse(sessionStorage.getItem('regform'));
+    form.firstname.value = savedData.firstname;
+    form.lastname.value = savedData.lastname;
+    form.status.value = savedData.status;
+    form.gender.value = savedData.gender;
+    form.phone.value = savedData.phone;
+    form.address.value = savedData.address;
+    form.email.value = savedData.email;
+    form.motivation.value = savedData.motivation;
+    form.suggestion.value = savedData.suggestion;
+    form.subscribe.checked = savedData.subscribe;
+  }
+};
+
+//form validation
+function validateForm() {
+  // Get values from form inputs
+  const firstName = document.forms["regform"]["firstname"].value;
+  const lastName = document.forms["regform"]["lastname"].value;
+  const phone = document.forms["regform"]["phone"].value;
+  const email = document.forms["regform"]["email"].value;
+  const address = document.forms["regform"]["current-address"].value;
+  const motivation = document.forms["regform"]["motivation"].value;
+  const project = document.forms["regform"]["project"].value;
+
+  // Validate first name
+  if (firstName === "") {
+    alert("Please enter your first name");
+    return false;
+  }
+
+  // Validate last name
+  if (lastName === "") {
+    alert("Please enter your last name");
+    return false;
+  }
+
+  // Validate phone number
+  if (phone === "") {
+    alert("Please enter your phone number");
+    return false;
+  } else if (!/^\+?\d+$/.test(phone)) {
+    alert("Please enter a valid phone number");
+    return false;
+  }
+
+  // Validate email
+  if (email === "") {
+    alert("Please enter your email address");
+    return false;
+  } else if (!/\S+@\S+\.\S+/.test(email)) {
+    alert("Please enter a valid email address");
+    return false;
+  }
+
+  // Validate address
+  if (address === "") {
+    alert("Please enter your current address");
+    return false;
+  }
+
+  // Validate motivation
+  if (motivation === "") {
+    alert("Please tell us more about yourself and why you want to join our club");
+    return false;
+  }
+
+  // Validate project suggestion
+  if (project === "") {
+    alert("Please suggest a project you wish we could start");
+    return false;
+  }
+
+  // All inputs are valid, return true to submit the form
+  return true;
+}
+
+// When the form is submitted
+document.forms.regform.addEventListener('submit', function(e) {
+  // Prevent the default form submission behavior
+  e.preventDefault();
+
+  // Get the form data and store it in session storage as a JSON string
+  var form = document.forms.regform;
+  var data = {
+    firstname: form.firstname.value,
+    lastname: form.lastname.value,
+    status: form.status.value,
+    gender: form.gender.value,
+    phone: form.phone.value,
+    address: form.address.value,
+    email: form.email.value,
+    motivation: form.motivation.value,
+    suggestion: form.suggestion.value,
+    subscribe: form.subscribe.checked
+  };
+  sessionStorage.setItem('regform', JSON.stringify(data));
+
+  // Submit the form
+  form.submit();
+});

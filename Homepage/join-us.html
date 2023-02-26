@@ -60,7 +60,7 @@
       </header>
 
         <main>
-            <form action="regaccept/reg-accept.html">  
+            <form name="regform" action="confirm.php" method="POST">  
                 <div class="container-form">  
                       <h2 style="text-align: center;"> Join us!</h2>   
                       <hr style="width: 60%;border-style: solid;">
@@ -116,7 +116,8 @@
                     <input type="checkbox">
                     <span class="checkmark"></span>
                 </label>
-                  <button  type="submit" class="registerbtn" value="submit">Register</button>    
+                <button type="submit" class="registerbtn" onclick="return validateForm()">Register</button>
+
                 </div>
                 </form>  
 
