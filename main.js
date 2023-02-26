@@ -12,11 +12,11 @@ icon.onclick = function(){
      if(icon.classList.contains("fa-moon")){
       document.body.classList.toggle("dark-theme");
       icon.classList.remove("fa-moon");
-      icon.classList.add("fa-cloud");
-    } else if (icon.classList.contains("fa-cloud")){
+      icon.classList.add("fa-bolt");
+    } else if (icon.classList.contains("fa-bolt")){
       document.body.classList.toggle("dark-theme");
       document.body.classList.toggle("cloud-theme");
-      icon.classList.remove("fa-cloud");
+      icon.classList.remove("fa-bolt");
       icon.classList.add("fa-sun");
     } else{
       document.body.classList.toggle("cloud-theme");
