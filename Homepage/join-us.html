@@ -61,21 +61,22 @@
         <!-- /Header -->
 
         <main>
-            <form id="regform" novalidate>  
+            <form id="regform" onsubmit="openConfirmationPage(); return false;">  
                 <div class="container-form">  
                       <h2 style="text-align: center;"> Join us!</h2>   
                       <hr style="width: 60%;border-style: solid;">
                     <label> Firstname </label>   
-                    <input type="text" id="firstname" placeholder= "Firstname" name="firstname"/>   
+                    <input type="text" id="firstname" placeholder= "Firstname" name="firstname" required/>   
+                    <p id="fnamefb"></p>
                     <label> Lastname </label>    
-                    <input type="text" id="lastname" placeholder="Lastname"  name="lastname" />   
+                    <input type="text" id="lastname" placeholder="Lastname"  name="lastname" required/>  
+                    <p id="lnamefb"></p> 
                     <div>  
                     
                     <label>   
                     Status :  
                     </label>   
-                        <select id="status" name="status">  
-                        <option value="Status"  >&#160; &#160;Status</option>  
+                        <select id="status" name="status" required>  
                         <option value="Junior School" >&#160; &#160;Junior School</option>  
                         <option value="Middle SSchool" >&#160; &#160;Middle SSchool</option>  
                         <option value="High School" >&#160; &#160;High School</option>  
@@ -85,6 +86,7 @@
                         <option value="Self-Employed/Freelance" >&#160; &#160;Self-Employed/Freelance</option>  
                         <option value="Enterprise owner" >&#160; &#160;Enterprise owner</option>  
                         </select> 
+                        <p id="statusfb"></p>
                      
                 </div> 
                
@@ -92,34 +94,40 @@
                 <label>   
                 Gender :  
                 </label>  
-                <input type="radio" value="Male" id="gender" name="gender"> Male   
-                <input type="radio" value="Female" id="gender" name="gender"> Female   
-                <input type="radio" value="Other" id="gender" name="gender"> Other  
+                <input type="radio" value="Male" id="gender" name="gender" required> Male   
+                <input type="radio" value="Female" id="gender" name="gender" required> Female   
+                <input type="radio" value="Other" id="gender" name="gender" required> Other  
+                <p id="genderfb"></p>
               </div>  
                 <label>   
+
                 Phone   
                 </label>  
-                <input type="text" id="phone" name="phone" value="+230" placeholder="phone no." size="10" />   
+                <input type="text" id="phone" name="phone" value="+230" placeholder="phone no." size="10" required/>   
+                <p id="phonefb"></p>
+
+              
                 Current Address   
-                <textarea cols="80" rows="5" id="address" name="address">  
-                    
-                </textarea>  
+                <textarea cols="80" rows="5" id="address" name="address" required></textarea>  
+                <p id="addressfb"></p>
                 <label><b>Email</b></label>  
-                <input type="text" placeholder="Enter Email" id="email" name="email">  
+                <input type="text" placeholder="Enter Email" id="email" name="email" required/>   
+                <p id="emailfb"></p>
+
                 Tell us more about you. What motivates you to join our club?  
-                <textarea cols="80" rows="5" placeholder="Write here" id="motivation" name = "motivation" required> 
-                  
-                </textarea> 
+                <textarea cols="80" rows="5"  id="motivation" name = "motivation" required></textarea> 
+                <p id="motivationfb"></p>
+
+
                 Suggest a project you wish we could start.
-                <textarea cols="80" rows="5" placeholder="Write here" id="project" name="project" required>  
-                  
-                </textarea>
+                <textarea cols="80" rows="5"  id="project" name="project" required></textarea>
+                <p id="projectfb"></p>
                 
                 <label class="container-check">Check to subscribe to our newsletter
-                    <input type="checkbox" id="subscribe">
-                    <span class="checkmark"></span>
+                  <input type="checkbox" id="subscribe" name="subscribe" checked="true">
+                  <span class="checkmark"></span>
                 </label>
-                <button type="button" class="registerbtn" onclick="openConfirmationPage()">Register</button>
+                <button type="submit" class="registerbtn">Register</button>
 
 
                 </div>
@@ -204,7 +212,158 @@
           
                 </footer>
                     
-                  
+                  <script>
+                                          // get form elements
+                      const form = document.getElementById("regform");
+                      const firstName = document.getElementById("firstname");
+                      const lastName = document.getElementById("lastname");
+                      const status = document.getElementById("status");
+                      const gender = document.getElementsByName("gender");
+                      const phone = document.getElementById("phone");
+                      const address = document.getElementById("address");
+                      const email = document.getElementById("email");
+                      const motivation = document.getElementById("motivation");
+                      const project = document.getElementById("project");
+                      const subscribe = document.getElementById("subscribe");
+
+                      // add event listeners to form elements
+                      firstName.addEventListener("input", validateFirstName);
+                      lastName.addEventListener("input", validateLastName);
+                      for (let i = 0; i < gender.length; i++) {
+                        gender[i].addEventListener("input", validateGender);
+                      }
+                      phone.addEventListener("input", validatePhone);
+                      address.addEventListener("input", validateAddress);
+                      email.addEventListener("input", validateEmail);
+                      motivation.addEventListener("input", validateMotivation);
+                      project.addEventListener("input", validateProject);
+                      subscribe.addEventListener("input", validateSubscribe);
+
+                      // validate all form elements on form submission
+                      form.addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        if (validateFirstName() &&
+                            validateLastName() &&
+                            validateGender() &&
+                            validatePhone() &&
+                            validateAddress() &&
+                            validateEmail() &&
+                            validateMotivation() &&
+                            validateProject() &&
+                            validateSubscribe()) {
+                          form.submit();
+                        }
+                      });
+
+                      // helper function to display validation message
+                      function displayValidationMessage(input, message, id) {
+                        const feedback = document.getElementById(id);
+                        if (message) {
+                          feedback.innerText = message;
+                        } else {
+                          feedback.innerText = "";
+                        }
+                      }
+
+
+                      // validate first name
+                      function validateFirstName() {
+                        const value = firstName.value.trim();
+                        if (value.length < 3) {
+                          displayValidationMessage(firstName, "First name must be at least 3 characters long","fnamefb");
+                        } else {
+                          displayValidationMessage(firstName, "","fnamefb");
+                        }
+                      }
+
+                      // validate last name
+                      function validateLastName() {
+                        const value = lastName.value.trim();
+                        if (value.length < 3) {
+                          displayValidationMessage(lastName, "Last name must be at least 3 characters long", "lnamefb");
+                        } else {
+                          displayValidationMessage(lastName, "", "lnamefb");
+                        }
+                      }
+
+                      
+
+                      // validate gender
+                      function validateGender() {
+                        let isChecked = false;
+                        for (let i = 0; i < gender.length; i++) {
+                          if (gender[i].checked) {
+                            isChecked = true;
+                            break;
+                          }
+                        }
+                        if (!isChecked) {
+                          displayValidationMessage(gender[0], "Please select a gender", "genderfb");
+                        } else {
+                          displayValidationMessage(gender[0], "", "genderfb");
+                        }
+                      }
+
+                      // validate phone
+                      function validatePhone() {
+                        const value = phone.value.trim();
+                        if (!/^(\+230)\d{8}$/.test(value)) {
+                          displayValidationMessage(phone, "Phone must start with +230 and be followed by 8 numbers. ONLY NUMBERS", "phonefb");
+                        } else {
+                          displayValidationMessage(phone, "", "phonefb");
+                        }
+                      }
+
+                      // validate address
+                      function validateAddress() {
+                        const value = address.value.trim();
+                        if (value.length < 10) {
+                          displayValidationMessage(address, "Address must be at least 10 characters long", "addressfb");
+                        } else {
+                          displayValidationMessage(address, "", "addressfb");
+                        }
+                      }
+
+                      // validate email
+                      function validateEmail() {
+                        const value = email.value.trim();
+                        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                          displayValidationMessage(email, "Please enter a valid email address", "emailfb");
+                        } else {
+                          displayValidationMessage(email, "", "emailfb");
+                        }
+                      }
+
+                      // validate motivation
+                      function validateMotivation() {
+                        const value = motivation.value.trim();
+                        if (value.length === 0) {
+                          displayValidationMessage(motivation, "Motivation is required and must be at least 50 characters long", "motivationfb");
+                        } else if (value.length < 50) {
+                          displayValidationMessage(motivation, "Motivation must be at least 50 characters long", "motivationfb");
+                        } else {
+                          displayValidationMessage(motivation, "", "motivationfb");
+                        }
+                      }
+
+
+                      function validateProject() {
+                        const value = project.value.trim();
+                        if (value.length === 0) {
+                          displayValidationMessage(project, "Project is required and must be at least 50 characters long", "projectfb");
+                        } else if (value.length < 50) {
+                          displayValidationMessage(project, "Project must be at least 50 characters long", "projectfb");
+                        } else {
+                          displayValidationMessage(project, "", "projectfb");
+                        }
+                      }
+
+                      function validateSubscribe() {
+                        const value = subscribe.checked;
+                        subscribe.value = value;
+                      }
+
+                  </script>
             </body>
         
         
