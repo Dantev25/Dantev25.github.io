@@ -77,6 +77,7 @@
                     Status :  
                     </label>   
                         <select id="status" name="status" required>  
+                        <option value="Status" >&#160; &#160;Status</option>  
                         <option value="Junior School" >&#160; &#160;Junior School</option>  
                         <option value="Middle SSchool" >&#160; &#160;Middle SSchool</option>  
                         <option value="High School" >&#160; &#160;High School</option>  
@@ -230,6 +231,7 @@
                       // add event listeners to form elements
                       firstName.addEventListener("input", validateFirstName);
                       lastName.addEventListener("input", validateLastName);
+                      status.addEventListener("change", validateStatus);
                       for (let i = 0; i < gender.length; i++) {
                         gender[i].addEventListener("input", validateGender);
                       }
@@ -256,8 +258,8 @@
                       // validate first name
                       function validateFirstName() {
                         const value = firstName.value.trim();
-                        if (value.length < 3) {
-                          displayValidationMessage(firstName, "First name must be at least 3 characters long","fnamefb");
+                        if (!/^[a-zA-Z]+$/.test(value) || value.length < 2) {
+                          displayValidationMessage(firstName, "First name must contain only letters and be at least 2 characters long","fnamefb");
                           return false;
                         } else {
                           displayValidationMessage(firstName, "","fnamefb");
@@ -268,11 +270,22 @@
                       // validate last name
                       function validateLastName() {
                         const value = lastName.value.trim();
-                        if (value.length < 3) {
-                          displayValidationMessage(lastName, "Last name must be at least 3 characters long", "lnamefb");
+                        if (!/^[a-zA-Z]+$/.test(value) || value.length < 2) {
+                          displayValidationMessage(lastName, "Last name must contain only letters and be at least 2 characters long", "lnamefb");
                           return false;
                         } else {
                           displayValidationMessage(lastName, "", "lnamefb");
+                          return true;
+                        }
+                      }
+
+                      // validate status
+                      function validateStatus() {
+                        if (status.value === "Status") {
+                          displayValidationMessage(status, "Please select your status","statusfb");
+                          return false;
+                        } else {
+                          displayValidationMessage(status, "","statusfb");
                           return true;
                         }
                       }
@@ -299,7 +312,7 @@
                       function validatePhone() {
                         const value = phone.value.trim();
                         if (!/^(\+230)\d{8}$/.test(value)) {
-                          displayValidationMessage(phone, "Phone must start with +230 and be followed by 8 numbers. ONLY NUMBERS", "phonefb");
+                          displayValidationMessage(phone, "Phone must start with +230 and be followed by 8 numbers only.", "phonefb");
                           return false;
                         } else {
                           displayValidationMessage(phone, "", "phonefb");
@@ -334,75 +347,110 @@
                       // validate motivation
                       function validateMotivation() {
                         const value = motivation.value.trim();
-                        if (value.length === 0) {
-                          displayValidationMessage(motivation, "Motivation is required and must be at least 50 characters long", "motivationfb");
+                        const words = value.split(/\s+/);
+                        if (words.length === 0) {
+                          displayValidationMessage(motivation, "Motivation is required", "motivationfb");
                           return false;
-                        } else if (value.length < 50) {
-                          displayValidationMessage(motivation, "Motivation must be at least 50 characters long", "motivationfb");
+                        } else if (words.length < 25) {
+                          displayValidationMessage(motivation, "Motivation must be at least 25 words long", "motivationfb");
+                          return false;
                         } else {
                           displayValidationMessage(motivation, "", "motivationfb");
                           return true;
                         }
                       }
 
-
+                      // validate project
                       function validateProject() {
                         const value = project.value.trim();
-                        if (value.length === 0) {
-                          displayValidationMessage(project, "Project is required and must be at least 50 characters long", "projectfb");
+                        const words = value.split(/\s+/);
+                        if (words.length === 0) {
+                          displayValidationMessage(project, "Project is required", "projectfb");
                           return false;
-                        } else if (value.length < 50) {
-                          displayValidationMessage(project, "Project must be at least 50 characters long", "projectfb");
+                        } else if (words.length < 25) {
+                          displayValidationMessage(project, "Project must be at least 25 words long", "projectfb");
                           return false;
                         } else {
                           displayValidationMessage(project, "", "projectfb");
                           return true;
                         }
                       }
+
                       // add event listener to form submit event
                       form.addEventListener("submit", function(event) {
-                        event.preventDefault();
-                        if (
-                          validateFirstName() &&
-                          validateLastName() &&
-                          validateGender() &&
-                          validatePhone() &&
-                          validateAddress() &&
-                          validateEmail() &&
-                          validateMotivation() &&
-                          validateProject()
-                        ) {
-                          // Use the confirm() method to display all the form inputs
-                          const confirmationMessage = `Please confirm the following details: 
-                           
-                          First Name: ${firstName.value}
-                          Last Name: ${lastName.value}
-                           
-                          Status: ${status.value}
-                           
-                          Gender: ${getSelectedGender()}
-                           
-                          Phone: ${phone.value}
-                           
-                          Address: ${address.value}
-                        
-                          Email: ${email.value}
-                            
-                          Motivation To join: ${motivation.value}
-                            
-                          Suggested Project: ${project.value}
-                            
-                          Subscribed: ${subscribe.checked ? 'Yes' : 'No'}`;
-                          
-                          const isConfirmed = confirm(confirmationMessage);
-                          
-                          if (isConfirmed) {
-                            openConfirmationPage(event);
-                          }
-                        } else {
-                          alert("Please input all fields correctly. Validation failed.")
+                      event.preventDefault();
+                      let validationMessages = [];
+
+                      if (
+                        validateFirstName() &&
+                        validateLastName() &&
+                        validateStatus() &&
+                        validateGender() &&
+                        validatePhone() &&
+                        validateAddress() &&
+                        validateEmail() &&
+                        validateMotivation() &&
+                        validateProject()
+                      ) {
+                        const confirmationMessage = `Please confirm the following details: 
+
+                        First Name: ${firstName.value}
+                        Last Name: ${lastName.value}
+
+                        Status: ${status.value}
+
+                        Gender: ${getSelectedGender()}
+
+                        Phone: ${phone.value}
+
+                        Address: ${address.value}
+
+                        Email: ${email.value}
+
+                        Motivation To join: ${motivation.value}
+
+                        Suggested Project: ${project.value}
+
+                        Subscribed: ${subscribe.checked ? 'Yes' : 'No'}`;
+
+                        const isConfirmed = confirm(confirmationMessage);
+
+                        if (isConfirmed) {
+                          openConfirmationPage(event);
                         }
-                      });
+                      } else {
+                        if (!validateFirstName()) {
+                          validationMessages.push("First name must be at least 2 characters long and cannot contain numbers");
+                        }
+                        if (!validateLastName()) {
+                          validationMessages.push("Last name must be at least 2 characters long and cannot contain numbers");
+                        }
+                        if (!validateStatus()) {
+                          validationMessages.push("Please select a valid status");
+                        }
+                        if (!validateGender()) {
+                          validationMessages.push("Please select a gender");
+                        }
+                        if (!validatePhone()) {
+                          validationMessages.push("Please enter a valid phone number");
+                        }
+                        if (!validateAddress()) {
+                          validationMessages.push("Please enter a valid address");
+                        }
+                        if (!validateEmail()) {
+                          validationMessages.push("Please enter a valid email address");
+                        }
+                        if (!validateMotivation()) {
+                          validationMessages.push("Please enter a valid motivation to join. It should be more than 25 words.");
+                        }
+                        if (!validateProject()) {
+                          validationMessages.push("Please enter a valid input in suggested project. It should be more than 25 words.");
+                        }
+
+                        alert(`Please input all fields correctly. \n${validationMessages.join("\n")}`);
+                      }
+                    });
+
                       // Helper function to get the selected gender value
                       function getSelectedGender() {
                         for (let i = 0; i < gender.length; i++) {
@@ -418,14 +466,15 @@
 
                         // Validate all form inputs
                         const isValid =
-                          validateFirstName() &&
-                          validateLastName() &&
-                          validateGender() &&
-                          validatePhone() &&
-                          validateAddress() &&
-                          validateEmail() &&
-                          validateMotivation() &&
-                          validateProject();
+                        validateFirstName() &&
+                        validateLastName() &&
+                        validateStatus() &&
+                        validateGender() &&
+                        validatePhone() &&
+                        validateAddress() &&
+                        validateEmail() &&
+                        validateMotivation() &&
+                        validateProject()
 
                         // If all inputs are valid, submit the form
                         if (isValid) {
