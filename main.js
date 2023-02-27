@@ -178,3 +178,17 @@ function initComparisons() {
 
 
 
+// *******************************************************
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+  card.addEventListener('click', () =>{
+  card.classList.toggle('flip');
+  const image = card.querySelector('.image');
+  const description= card.querySelector('.description');
+  const temp = image.scroll;
+  image.src = description.src;
+  description.src = temp;
+  })
+})
+
