@@ -648,6 +648,14 @@ hr{
       color:#000000
   }
 
+  .drag{
+    font-size: 1.7em; 
+    color: rgb(0, 0, 0);
+    width: 100%;
+    max-width:100%
+
+}
+
 
 .img-comp-container {
   position: relative;
@@ -684,7 +692,9 @@ hr{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding-right: 300px;
 }
+
    
 
 @media only screen and (max-width: 888px){
@@ -1212,7 +1222,7 @@ form{
 input[type=text], input[type=password], textarea {  
   width: 100%;  
   padding: 15px;  
-  margin: 5px 0 22px 0;  
+  margin: 5px 0px 10px 0px;  
   display: inline-block;  
   border: none;  
   background: #f1f1f1;  
@@ -1341,6 +1351,14 @@ input[type=text]:focus, input[type=password]:focus {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+/* validation message css */
+form p{
+    color: rgb(106, 0, 255);
+    margin: -5px 0px 10px 0px;
+
+
+}
 
 .container-regaccept{
     display: flex;

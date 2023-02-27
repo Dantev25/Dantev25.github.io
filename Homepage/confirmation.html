@@ -42,10 +42,10 @@
                       
                       <li class="nav-li"><a href="https://ecowarriorsclub.me" class="nav-link">Home</a></li>
                     <li class="nav-li"><a href="posts.html" class="nav-link">Posts</a></li>
-                    <li class="nav-li"><a href="gallery.html" class="nav-link"><b><u>Gallery</u></b></a></li>
+                    <li class="nav-li"><a href="gallery.html" class="nav-link">Gallery</a></li>
                     <li class="nav-li"><a href="about-us.html" class="nav-link">About Us</a></li>
                     <li class="nav-li"><a href="contact-us.html" class="nav-link">Contact Us</a></li>
-                    <li class="nav-li"><a href="join-us.html" class="nav-link">Join Club</a></li>
+                    <li class="nav-li"><a href="join-us.html" class="nav-link"><b><u>Join Club</u></b></a></li>
                     </ul>
                 </div>
                 <!-- collapse on toggle button click -->
@@ -90,6 +90,8 @@
 
               </form>
               <button onclick="submitForm()">Submit</button>
+              <a href="join-us.html"><button>Return</button></a>
+
             </ul>
             <script>
               // get the query string parameters
@@ -143,8 +145,6 @@
 
                 // save updated full names to local storage
                 localStorage.setItem("fullNames", JSON.stringify(fullNames));
-
-                alert(fullName);
 
                 // submit the form
                 document.getElementById("hiddenForm").submit();
