@@ -177,22 +177,6 @@ function initComparisons() {
 
 
 
-function openConfirmationPage() {
-  // Get the form element
-  const form = document.getElementById("regform");
-
-  // Create a new FormData object and populate it with the form data
-  const formData = new FormData(form);
-
-  // Serialize the form data to a query string
-  const queryString = new URLSearchParams(formData).toString();
-
-  // Construct the URL for the confirmation page
-  const confirmationUrl = "/Homepage/confirmation.html?" + queryString;
-
-  // Open the confirmation page
-  window.location.href = confirmationUrl;
-}
 
 // *******************************************************
 const cards = document.querySelectorAll('.card');
