@@ -595,15 +595,39 @@ hr{
     justify-content: space-around;
     padding: 20px;
   }
-  
-  .image {
+
+
+  .card{
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
     position: relative;
-    margin: 20px;
-    width: 300px;
+    width:300px;
     height: 200px;
     perspective: 1000px;
+    text-align: center;
+    transition: transform 1.0s;
+    transform-style: preserve-3d;
+  }
+
+  
+  .card .image,
+  .card .description {
+    position: absolute;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
   }
   
+  .card .image{
+    z-index: 2;
+  }
+
+  .card .description{
+    transform: rotateY(180deg);
+    z-index: 1;
+  }
   .image img {
     width: 100%;
     height: 100%;
@@ -625,12 +649,20 @@ hr{
     text-align: center;
   }
   
-  .image:hover img {
+  .card:hover img {
     transform: rotateY(180deg);
   }
   
-  .image:hover .description {
+  .card:hover .description {
     transform: rotateY(0deg);
+  }
+
+  .card:hover img {
+    transform: rotateY(180deg);
+  }
+  
+  .card .flip {
+    transform: rotateY(180deg);
   }
   
   .gallery-h1 {
