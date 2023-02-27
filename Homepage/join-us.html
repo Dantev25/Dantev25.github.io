@@ -61,7 +61,7 @@
         <!-- /Header -->
 
         <main>
-            <form id="regform" onsubmit="openConfirmationPage(); return false;">  
+          <form id="regform" name="regform">
                 <div class="container-form">  
                       <h2 style="text-align: center;"> Join us!</h2>   
                       <hr style="width: 60%;border-style: solid;">
@@ -123,14 +123,14 @@
                 <textarea cols="80" rows="5"  id="project" name="project" required></textarea>
                 <p id="projectfb"></p>
                 
-                <label class="container-check">Check to subscribe to our newsletter
-                  <input type="checkbox" id="subscribe" name="subscribe" checked="true">
-                  <span class="checkmark"></span>
-                </label>
+                <div class="container-check">        
+                <label for="subscribe">Check to subscribe to our newsletter</label>
+                  <input type="checkbox" id="subscribe" name="subscribe">
+                </div>
                 <button type="submit" class="registerbtn">Register</button>
 
 
-                </div>
+                
                 </form>  
                         
             
@@ -213,7 +213,8 @@
                 </footer>
                     
                   <script>
-                                          // get form elements
+                    
+                      // get form elements
                       const form = document.getElementById("regform");
                       const firstName = document.getElementById("firstname");
                       const lastName = document.getElementById("lastname");
@@ -237,23 +238,9 @@
                       email.addEventListener("input", validateEmail);
                       motivation.addEventListener("input", validateMotivation);
                       project.addEventListener("input", validateProject);
-                      subscribe.addEventListener("input", validateSubscribe);
 
-                      // validate all form elements on form submission
-                      form.addEventListener("submit", function(event) {
-                        event.preventDefault();
-                        if (validateFirstName() &&
-                            validateLastName() &&
-                            validateGender() &&
-                            validatePhone() &&
-                            validateAddress() &&
-                            validateEmail() &&
-                            validateMotivation() &&
-                            validateProject() &&
-                            validateSubscribe()) {
-                          form.submit();
-                        }
-                      });
+
+                      
 
                       // helper function to display validation message
                       function displayValidationMessage(input, message, id) {
@@ -271,8 +258,10 @@
                         const value = firstName.value.trim();
                         if (value.length < 3) {
                           displayValidationMessage(firstName, "First name must be at least 3 characters long","fnamefb");
+                          return false;
                         } else {
                           displayValidationMessage(firstName, "","fnamefb");
+                          return true;
                         }
                       }
 
@@ -281,12 +270,12 @@
                         const value = lastName.value.trim();
                         if (value.length < 3) {
                           displayValidationMessage(lastName, "Last name must be at least 3 characters long", "lnamefb");
+                          return false;
                         } else {
                           displayValidationMessage(lastName, "", "lnamefb");
+                          return true;
                         }
                       }
-
-                      
 
                       // validate gender
                       function validateGender() {
@@ -299,8 +288,10 @@
                         }
                         if (!isChecked) {
                           displayValidationMessage(gender[0], "Please select a gender", "genderfb");
+                          return false;
                         } else {
                           displayValidationMessage(gender[0], "", "genderfb");
+                          return true;
                         }
                       }
 
@@ -309,8 +300,10 @@
                         const value = phone.value.trim();
                         if (!/^(\+230)\d{8}$/.test(value)) {
                           displayValidationMessage(phone, "Phone must start with +230 and be followed by 8 numbers. ONLY NUMBERS", "phonefb");
+                          return false;
                         } else {
                           displayValidationMessage(phone, "", "phonefb");
+                          return true;
                         }
                       }
 
@@ -319,8 +312,10 @@
                         const value = address.value.trim();
                         if (value.length < 10) {
                           displayValidationMessage(address, "Address must be at least 10 characters long", "addressfb");
+                          return false;
                         } else {
                           displayValidationMessage(address, "", "addressfb");
+                          return true;
                         }
                       }
 
@@ -329,8 +324,10 @@
                         const value = email.value.trim();
                         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
                           displayValidationMessage(email, "Please enter a valid email address", "emailfb");
+                          return false;
                         } else {
                           displayValidationMessage(email, "", "emailfb");
+                          return true;
                         }
                       }
 
@@ -339,10 +336,12 @@
                         const value = motivation.value.trim();
                         if (value.length === 0) {
                           displayValidationMessage(motivation, "Motivation is required and must be at least 50 characters long", "motivationfb");
+                          return false;
                         } else if (value.length < 50) {
                           displayValidationMessage(motivation, "Motivation must be at least 50 characters long", "motivationfb");
                         } else {
                           displayValidationMessage(motivation, "", "motivationfb");
+                          return true;
                         }
                       }
 
@@ -351,17 +350,69 @@
                         const value = project.value.trim();
                         if (value.length === 0) {
                           displayValidationMessage(project, "Project is required and must be at least 50 characters long", "projectfb");
+                          return false;
                         } else if (value.length < 50) {
                           displayValidationMessage(project, "Project must be at least 50 characters long", "projectfb");
+                          return false;
                         } else {
                           displayValidationMessage(project, "", "projectfb");
+                          return true;
+                        }
+                      }
+                      // add event listener to form submit event
+                      form.addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        if (
+                          validateFirstName() &&
+                          validateLastName() &&
+                          validateGender() &&
+                          validatePhone() &&
+                          validateAddress() &&
+                          validateEmail() &&
+                          validateMotivation() &&
+                          validateProject()
+                        ) {
+                          openConfirmationPage(event);
+                        } else{
+                          alert("Please input all fields correctly. Validation failed.")
+                        }
+                      });
+
+                      function openConfirmationPage(event) {
+                        event.preventDefault();
+
+                        // Validate all form inputs
+                        const isValid =
+                          validateFirstName() &&
+                          validateLastName() &&
+                          validateGender() &&
+                          validatePhone() &&
+                          validateAddress() &&
+                          validateEmail() &&
+                          validateMotivation() &&
+                          validateProject();
+
+                        // If all inputs are valid, submit the form
+                        if (isValid) {
+                          // Get the form element
+                          const form = document.getElementById("regform");
+
+                          // Create a new FormData object and populate it with the form data
+                          const formData = new FormData(form);
+
+                          // Serialize the form data to a query string
+                          const queryString = new URLSearchParams(formData).toString();
+
+                          // Construct the URL for the confirmation page
+                          const confirmationUrl = "/Homepage/confirmation.html?" + queryString;
+
+                          // Open the confirmation page
+                          window.location.href = confirmationUrl;
                         }
                       }
 
-                      function validateSubscribe() {
-                        const value = subscribe.checked;
-                        subscribe.value = value;
-                      }
+
+                     
 
                   </script>
             </body>
