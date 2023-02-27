@@ -216,13 +216,17 @@
             // retrieve full names array from local storage
             const fullNames = JSON.parse(localStorage.getItem("fullNames")) || [];
 
-            // display full names in a list
+            // remove duplicates and convert all elements to uppercase
+            const uniqueFullNames = [...new Set(fullNames.map(fullName => fullName.toUpperCase()))];
+
+            // display unique full names in a list
             const fullNamesList = document.getElementById("fullNamesList");
-            fullNames.forEach((fullName) => {
+            uniqueFullNames.forEach((fullName) => {
               const li = document.createElement("li");
               li.textContent = fullName;
               fullNamesList.appendChild(li);
             });
+
           </script>
     </body>
 </html>
