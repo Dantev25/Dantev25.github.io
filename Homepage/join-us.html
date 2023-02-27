@@ -372,11 +372,46 @@
                           validateMotivation() &&
                           validateProject()
                         ) {
-                          openConfirmationPage(event);
-                        } else{
+                          // Use the confirm() method to display all the form inputs
+                          const confirmationMessage = `Please confirm the following details: 
+                           
+                          First Name: ${firstName.value}
+                          Last Name: ${lastName.value}
+                           
+                          Status: ${status.value}
+                           
+                          Gender: ${getSelectedGender()}
+                           
+                          Phone: ${phone.value}
+                           
+                          Address: ${address.value}
+                        
+                          Email: ${email.value}
+                            
+                          Motivation To join: ${motivation.value}
+                            
+                          Suggested Project: ${project.value}
+                            
+                          Subscribed: ${subscribe.checked ? 'Yes' : 'No'}`;
+                          
+                          const isConfirmed = confirm(confirmationMessage);
+                          
+                          if (isConfirmed) {
+                            openConfirmationPage(event);
+                          }
+                        } else {
                           alert("Please input all fields correctly. Validation failed.")
                         }
                       });
+                      // Helper function to get the selected gender value
+                      function getSelectedGender() {
+                        for (let i = 0; i < gender.length; i++) {
+                          if (gender[i].checked) {
+                            return gender[i].value;
+                          }
+                        }
+                        return null;
+                      }
 
                       function openConfirmationPage(event) {
                         event.preventDefault();
