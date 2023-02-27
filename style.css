@@ -164,6 +164,7 @@ a{
 .main-logo img{
     display: block;
     width: 200px;
+    max-width: 100%;
     background: transparent;
     max-width: 100%;
     margin-left: 40px;
@@ -222,7 +223,7 @@ a{
         -webkit-box-pack: left;
             -ms-flex-pack: left;
                 justify-content: left;
-
+main
     }
 
     .collapse.nav-link{
@@ -253,6 +254,7 @@ a{
        
 
     }
+    
 }
 
 /* Main page */
@@ -335,7 +337,16 @@ a{
     color: darkslategrey;
     margin-left: 15px;
 }
-
+@media(max-width:900px){
+    .home-content h1{
+        margin: 0;
+        margin-top: 20px;
+        font-size: 22px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: darkslategrey;
+        margin-left: 15px;
+    }
+}
 .dark-theme h1{
     color: #F0FFF0;
 }
@@ -415,8 +426,8 @@ a{
     background-repeat: no-repeat;
     border-radius: 15px;
     margin-top: 40px;
-    height: 542px;
-    width: 410px;
+    max-height: 542px;
+    max-width: 410px;
 
 }
 
@@ -467,6 +478,7 @@ a{
 .article-c{
     max-width: 330px;
     margin:40px;
+    
 
     
 }
@@ -484,6 +496,7 @@ a{
     background-repeat: no-repeat;
     border-radius: 15px;
     margin-top: 40px;
+    
 
 
 }
@@ -501,9 +514,11 @@ hr{
 }
 
 .article-c img {
-    width: 320px;
-    height: 200px;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 15px;
+    width: auto;
+    height: auto;
 }
 
 .article-clock{
@@ -554,6 +569,7 @@ hr{
             justify-content: space-evenly;
         
     }
+    
     .article-blank1{
         background-color: transparent;
         margin-top: 40px;
@@ -592,6 +608,21 @@ hr{
                 justify-content: center;
         max-width: 100%;
         
+        
+    }
+    .article-c{
+        max-height: 800px;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .article-bg{
+        max-height: 800px;
+        max-width: 100%;
+    }
+    .article-bg p{
+        max-height: 100%;
+        max-width: 100%;
     }
     .article-blank1{
         background-color: transparent;
@@ -607,6 +638,7 @@ hr{
     
     
     }
+
 }
 
 /* Gallery */
@@ -839,6 +871,7 @@ ul.breadcrumb {
     padding: 20px;
     width: 30%;
 }
+x
 
 .dark-theme .footer-element{
     color: #FFFFFF;
@@ -949,6 +982,35 @@ ul.breadcrumb {
 
 .cloud-theme .breadcrumb a{
     color: #8B008B;
+}
+@media(max-width:500px){
+    .footer-container{
+        flex-direction: column;
+    }
+    .footer-element{
+        max-width: 100%;
+        width: 100%;
+    }
+    .footer-company-desc{
+        max-width: 100%;
+    }
+    .main-logo img{
+        width: 150px;
+        margin: 0px;
+    }
+    .toggle-button{
+        font-size: 21px;
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 0;
+        top: 20px;
+        margin: 34px 40px;
+        
+    
+    }
+   
+    
 }
 /* Article  page*/
 .Article{
