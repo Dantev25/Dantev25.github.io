@@ -223,7 +223,6 @@ a{
         -webkit-box-pack: left;
             -ms-flex-pack: left;
                 justify-content: left;
-main
     }
 
     .collapse.nav-link{
@@ -1334,7 +1333,7 @@ form{
     padding: 20px;  
     max-width: 100%;
     background-color: #aebfbd;  
-    width: 50%;
+    width: 60%;
     border-radius: 10px;
 }  
   
@@ -1643,7 +1642,12 @@ form p{
 }
 
 
-
+@media(max-width:900px){
+    .container-form{
+        width: 80%;
+    }
+    
+}
 /* Sitemap */
 
 
