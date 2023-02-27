@@ -293,6 +293,40 @@ a{
     border-radius: 15px;
 }
 
+.text-home img:hover{
+    content: url(Images/solidarity.png);
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
+}
+
+@keyframes fadeIn{
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+@-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+  
+@-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+  
+@-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 .home-content h1{
     margin: 0;
     margin-top: 20px;
@@ -635,8 +669,17 @@ hr{
   
   .gallery-h1 {
       text-align: center;
-      color:#000000
+      color: darkslategrey;
+      font-family: 'URW Chancery L',cursive;
   }
+
+  .drag{
+    font-size: 1.7em; 
+    color: rgb(0, 0, 0);
+    width: 100%;
+    max-width:100%
+
+}
 
 
 .img-comp-container {
@@ -674,7 +717,9 @@ hr{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding-right: 300px;
 }
+
    
 
 @media only screen and (max-width: 888px){
