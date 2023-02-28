@@ -658,6 +658,7 @@ hr{
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
+    margin-bottom: 20px;
   }
 
 
@@ -782,6 +783,7 @@ hr{
     padding-right: 300px;
 }
 
+
    
 
 @media only screen and (max-width: 888px){
@@ -796,7 +798,12 @@ hr{
     }
 }
 
+@media(max-width:650px){
+    .gallery .card{
+        margin-bottom: 15px;
+    }
 
+}
 
 
 /* footer */
