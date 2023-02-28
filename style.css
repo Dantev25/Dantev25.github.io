@@ -177,6 +177,12 @@ a{
 .dark-theme #dark-logo{
     content: url(Images/cover-cropped-dark.png);
 }
+.main-logo a{
+    display: inline-block; 
+    padding: 0; 
+    margin: 0;
+}
+
 /*------ Navigation menu------ */
 
 /* Media Query */
