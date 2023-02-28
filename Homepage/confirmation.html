@@ -61,9 +61,11 @@
         <!-- /Header -->
 
         <main>
-            <h1>Thank you for filling our form!</h1>
-            <p>Here's the information you provided:</p>
-            <ul>
+        <div class="container-confirm">
+          <div class="confirm">
+            <h1>Thank you for filling our form!</h1><br>
+            <p>Here's the information you provided:</p><br>
+            <ul style="margin-left: 19px;">
               <li><strong>Firstname:</strong> <span id="firstname"></span></li>
               <li><strong>Lastname:</strong> <span id="lastname"></span></li>
               <li><strong>Status:</strong> <span id="status"></span></li>
@@ -71,9 +73,9 @@
               <li><strong>Phone:</strong> <span id="phone"></span></li>
               <li><strong>Address:</strong> <span id="address"></span></li>
               <li><strong>Email:</strong> <span id="email"></span></li>
-              <li><strong>Motivation:</strong> <span id="motivation"></span></li>
-              <li><strong>Project:</strong> <span id="project"></span></li>
-              <li><strong>Subscribe:</strong> <span id="subscribe"></span></li>
+              <li><strong>Motivation to join:</strong> <span id="motivation"></span></li>
+              <li><strong>Suggested Project:</strong> <span id="project"></span></li>
+              <li><strong>Subscribed:</strong> <span id="subscribe"></span></li>
 
               <form id="hiddenForm" style="display:none;">
                 <input type="hidden" name="firstname" id="hiddenFirstname">
@@ -86,13 +88,20 @@
                 <input type="hidden" name="motivation" id="hiddenMotivation">
                 <input type="hidden" name="project" id="hiddenProject">
                 <input type="hidden" name="subscribe" id="hiddenSubscribe">
-                <button onclick="location.href='/regaccept/reg-accept.html'">Submit</button>
-
               </form>
-              <button onclick="submitForm()">Submit</button>
-              <a href="join-us.html"><button>Return</button></a>
+              
+              
+
+              
 
             </ul>
+            <div class="button-container">
+              <a href="join-us.html"><button type="button">Return</button></a>
+              <button type="submit" onclick="submitForm()" style="margin-left: 20px;">Submit</button>
+            </div>
+          </div>
+        </div>
+            
             <script>
               // get the query string parameters
               const params = new URLSearchParams(window.location.search);

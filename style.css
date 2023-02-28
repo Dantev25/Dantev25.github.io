@@ -1458,8 +1458,70 @@ form p{
     color: #970707;
 }
 
-
-
+/* confirmation page */
+.container-confirm{
+    display: block;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    justify-items: center;
+    margin: auto;
+    background-image: url(Images/textured\ background.png);
+    border-radius: 10px 60px;
+    margin-bottom: 275px;
+    max-width: 50%;
+    width: auto;
+    padding:3%;
+}
+.confirm{
+    
+    height: auto;
+}
+.button-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.confirm button {
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+.confirm  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+.confirm  button[type="button"] {
+    background-color: #ccc;
+    color: black;
+  }
+  
+.confirm button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+.confirm button[type="button"]:hover {
+    background-color: #bbb;
+  }
+@media(max-width:1300px){
+    .container-confirm{
+        max-width: 70%;
+    }
+}
 /* About us */
 
 .container-about{
